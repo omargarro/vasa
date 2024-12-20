@@ -75,7 +75,15 @@
 					{text: 'Total DVH', align: 'center', name: 'total_dvh' },
 					{text: 'M2. de cada cara del DVH', align: 'center', name: 'cara_dvh' },
 				]
-            });
+            }).on("keydown", function (event) {
+				if (event.key === "Enter") {
+					const grid = $("#grid");
+					const selectedCell = grid.jqxGrid('getselectedcell');
+					if (selectedCell) {
+						grid.jqxGrid('endcelledit', selectedCell.rowindex, selectedCell.datafield, false);
+					}
+				}
+			});
         });
     </script>
 </body>
