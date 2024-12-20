@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekoglass</title>
+	<link rel="stylesheet" href="https://jqwidgets.com/public/jqwidgets/styles/jqx.base.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+	<script src="https://jqwidgets.com/public/jqwidgets/jqx-all.js"></script>
+</head>
+<body>
+	<h1 style="text-align: center; font-weight: bold;">Ekoglass</h1>
+    <div id="grid"></div>
+
+    <script>
+        $(document).ready(function () {
+            // Define data source
+            const months = [
+                "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"
+            ];
+
+            const data = months.map((month) => {
+                return {
+                    mes: month,
+                    dvh_cant: null,
+                    dvh_miesp: null,
+                    dvh_lam: null,
+                    dvh_float: null,
+                    dvh_temp: null,
+                    dvh_text: null,
+                    dvh_esp: null
+                };
+            });
+
+            const source = {
+                localdata: data,
+                datatype: "array",
+                datafields: [
+                    { name: "mes", type: "string" },
+                    { name: "dvh_cant", type: "number" },
+                    { name: "dvh_miesp", type: "number" },
+                    { name: "dvh_lam", type: "number" },
+                    { name: "dvh_float", type: "number" },
+                    { name: "dvh_temp", type: "number" },
+                    { name: "dvh_text", type: "number" },
+                    { name: "dvh_esp", type: "number" },
+                ]
+            };
+
+            const dataAdapter = new $.jqx.dataAdapter(source);
+
+            // Initialize grid
+            $("#grid").jqxGrid({
+                width: '100%',
+                autoheight: true,
+                source: dataAdapter,
+                editable: true,
+                selectionmode: "singlecell",
+                columnsresize: true,
+                columns: [
+                    { text: "Mes", datafield: "mes", width: "9%", pinned: true },
+                    { text: "Cant", datafield: "dvh_cant", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'total_dvh' },
+                    { text: "MI Alum", datafield: "dvh_miesp", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput", columngroup:'total_dvh' },
+                    { text: "Lami.", datafield: "dvh_lam", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'cara_dvh' },
+                    { text: "Float", datafield: "dvh_float", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'cara_dvh' },
+                    { text: "Temp.", datafield: "dvh_temp", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'cara_dvh' },
+                    { text: "Text.", datafield: "dvh_text", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'cara_dvh' },
+                    { text: "Espe.", datafield: "dvh_esp", width: "13%", cellsalign: "center", align: "center", columntype: "numberinput",columngroup:'cara_dvh' }
+                ],
+				columngroups: [
+					{text: 'Total DVH', align: 'center', name: 'total_dvh' },
+					{text: 'M2. de cada cara del DVH', align: 'center', name: 'cara_dvh' },
+				]
+            });
+        });
+    </script>
+</body>
+</html>
